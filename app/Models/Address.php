@@ -9,4 +9,8 @@ class Addresses extends Model
 {
     use HasFactory;
     protected $fillable=['zipcode','city'];
+
+    public function tradespersonAddress(){
+        return $this->hasMany(Tradesperson::class);
+    }
 }
