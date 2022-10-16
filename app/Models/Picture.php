@@ -10,4 +10,8 @@ class Pictures extends Model
     use HasFactory;
 
     protected $fillable=['file','isItProfilePicture'];
+
+    public function tradespersonPicture(){
+        return $this->hasOne(Tradesperson::class);
+    }
 }
