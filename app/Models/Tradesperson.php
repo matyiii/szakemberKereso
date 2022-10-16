@@ -16,4 +16,17 @@ class Tradesperson extends Model
         'introduction',
         'highlighted'
     ];
+
+    public function professionsTp(){
+        //return $this->belongsToMany(Profession::class);
+        return $this->belongsToMany(Tradesperson::class,'Tradesperson_profession','profession_id','tradesperson_id');
+    }
+
+    public function addressTp(){
+        return $this->hasOne(Address::class);
+    }
+
+    public function pictureTp(){
+        return $this->hasMany(Picture::class);
+    }
 }
