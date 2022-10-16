@@ -10,4 +10,9 @@ class Profession extends Model
     use HasFactory;
 
     protected $fillable=['name'];
+
+    public function tradespersonProfession(){
+        //return $this->belongsToMany(Tradesperson::class);
+        return $this->belongsToMany(Tradesperson::class,'Tradesperson_profession','tradesperson_id','profession_id');
+    }
 }
