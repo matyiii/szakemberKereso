@@ -22,6 +22,8 @@ return new class extends Migration
             $table->tinyInteger('highlighted');
             $table->date('startDate');
             $table->date('endDate');
+            $table->integer('ratingSum');
+            $table->integer('ratingCount');
         });
     }
 
