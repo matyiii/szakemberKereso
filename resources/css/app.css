@@ -12,9 +12,11 @@ body {
     position:absolute;
     bottom:0;
     width:100%;
+    height:5%;
 }
 
 #navbar{
     background-color:blanchedalmond;
     padding-top: 0px;
+    padding-bottom: 0px;
 }
