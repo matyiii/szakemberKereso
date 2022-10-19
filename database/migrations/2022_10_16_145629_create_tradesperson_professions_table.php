@@ -13,15 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tradesperson_professions', function (Blueprint $table) {
-            $table->unsignedBigInteger('tradesperson_id')->unsigned()->index();
-            $table->unsignedBigInteger('profession_id')->unsigned()->index();
-            //$table->index('profession_id');
-            //$table->index('tradesperson_id');
-            $table->foreign('tradesperson_id')->references('id')->on('tradespersons')->onDelete('cascade');
-            $table->foreign('profession_id')->references('id')->on('professions')->onDelete('cascade');
-            //$table->foreignId('tradesperson_id')->constrained('tradespersons');
-            //$table->foreignId('profession_id')->constrained('professions');
+        if(!Schema::hasTable('tradesperson_professions')){
+            Schema::create('tradesperson_professions', function (Blueprint $table) {
+                $table->unsignedBigInteger('tradesperson_id');
+                $table->unsignedBigInteger('profession_id');
+                //$table->foreign('tradesperson_id')->references('id')->on('tradespersons')->onDelete('cascade');
+                //$table->foreign('profession_id')->references('id')->on('professions')->onDelete('cascade');
+                //$table->foreignId('tradesperson_id')->constrained('tradespersons');
+                //$table->foreignId('profession_id')->constrained('professions');
+            });
+        }
+
+        Schema::table('tradesperson_professions', function (Blueprint $table){
+            //$table->foreign('tradesperson_id')->references('id')->on('tradespersons')->onDelete('cascade');
+            //$table->foreign('profession_id')->references('id')->on('professions')->onDelete('cascade');
+            $table->foreignId('tradesperson_id')->constrained('tradespersons');
+            $table->foreignId('profession_id')->constrained('professions');
         });
     }
 

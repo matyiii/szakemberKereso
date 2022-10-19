@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tradespersons', function (Blueprint $table){
-            $table->increments('id');
+            $table->unsignedBigInteger('id');
             $table->string('firstname',30);
             $table->string('lastname',30);
             $table->integer('addressId');
