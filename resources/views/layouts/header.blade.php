@@ -13,6 +13,12 @@
             <li class="nav-item">
                 <a class="navbar-link" href="#">Szakember Lista</a>
             </li>
+            <li class="nav-item">
+                <a class="navbar-link" href="#">Belépés</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-link" href="#">Regisztráció</a>
+            </li>
         </ul>
     </div>
 </nav>
