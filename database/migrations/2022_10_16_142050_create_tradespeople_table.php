@@ -14,16 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tradespersons', function (Blueprint $table){
-            $table->unsignedBigInteger('id');
+            $table->increments('id');
             $table->string('firstname',30);
             $table->string('lastname',30);
-            $table->integer('addressId');
-            $table->text('introduction');
-            $table->tinyInteger('highlighted');
-            $table->date('startDate');
-            $table->date('endDate');
-            $table->integer('ratingSum');
-            $table->integer('ratingCount');
+            $table->integer('addressId')->nullable();
+            $table->text('introduction')->nullable();
+            $table->tinyInteger('highlighted')->default(0);
+            $table->date('startDate')->nullable();
+            $table->date('endDate')->nullable();
+            $table->integer('ratingSum')->default(0);
+            $table->integer('ratingCount')->default(0);
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('created_at')->nullable();
         });
     }
 
