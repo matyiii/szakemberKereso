@@ -9,12 +9,14 @@ class Tradesperson extends Model
 {
     use HasFactory;
 
+    protected $table='tradespersons';
+
     protected $fillabe=[
         'firstname',
         'lastname',
         'addressId',
         'introduction',
-        'highlighted'
+        'highlighted',
     ];
 
     public function professionsTp(){
