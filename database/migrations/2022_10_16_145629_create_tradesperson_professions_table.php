@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tradesperson_professions', function (Blueprint $table) {
-            $table->integer('tradesperson_id');
-            $table->integer('profession_id');
+            $table->unsignedBigInteger('tradesperson_id')->unsigned()->index();
+            $table->unsignedBigInteger('profession_id')->unsigned()->index();
+            //$table->index('profession_id');
+            //$table->index('tradesperson_id');
             $table->foreign('tradesperson_id')->references('id')->on('tradespersons')->onDelete('cascade');
             $table->foreign('profession_id')->references('id')->on('professions')->onDelete('cascade');
             //$table->foreignId('tradesperson_id')->constrained('tradespersons');
