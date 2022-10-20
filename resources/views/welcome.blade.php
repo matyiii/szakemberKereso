@@ -5,5 +5,7 @@
 @endsection
 
 @section('content')
-    <h1>Main</h1>
+    @foreach ($tradespersons as $tp)
+        <p>{{ $tp->firstname }}</p>
+    @endforeach
 @endsection
