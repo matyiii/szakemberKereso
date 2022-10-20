@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('head')
-    <title>SzakemberKereső</title>
+    <title>{{ __('SzakemberKereső') }}</title>
 @endsection
 
 @section('content')

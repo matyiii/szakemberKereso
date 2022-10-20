@@ -1,3 +1,3 @@
 <div class="footer">
-    Elérhetőségek
+    {{ __('Elérhetőségek') }}
 </div>
