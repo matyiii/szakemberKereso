@@ -13,20 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('tradesperson_professions')){
-            Schema::create('tradesperson_professions', function (Blueprint $table) {
-                $table->unsignedBigInteger('tradesperson_id');
-                $table->unsignedBigInteger('profession_id');
-                //$table->foreign('tradesperson_id')->references('id')->on('tradespersons')->onDelete('cascade');
-                //$table->foreign('profession_id')->references('id')->on('professions')->onDelete('cascade');
-                //$table->foreignId('tradesperson_id')->constrained('tradespersons');
-                //$table->foreignId('profession_id')->constrained('professions');
-            });
-        }
-
-        Schema::table('tradesperson_professions', function (Blueprint $table){
-            //$table->foreign('tradesperson_id')->references('id')->on('tradespersons')->onDelete('cascade');
-            //$table->foreign('profession_id')->references('id')->on('professions')->onDelete('cascade');
+        Schema::create('tradesperson_professions', function (Blueprint $table) {
             $table->foreignId('tradesperson_id')->constrained('tradespersons');
             $table->foreignId('profession_id')->constrained('professions');
         });
