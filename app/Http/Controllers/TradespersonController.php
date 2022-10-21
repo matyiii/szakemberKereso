@@ -10,6 +10,6 @@ class TradespersonController extends Controller
     public function index(){
         $tradespersons = Tradesperson::all();
         //dd($tradespersons);
-        return view('welcome')->with('tradespersons',$tradespersons);
+        return view('home')->with('tradespersons',$tradespersons);
     }
 }
