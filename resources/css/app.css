@@ -28,3 +28,8 @@ body {
     text-decoration: none;
     color: black;
 }
+
+#addTpForm{
+    padding: 10px;
+    margin:auto;
+}
