@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="navbar-link" href="#">{{ __('Szakember Hozzáadás') }}</a>
+                <a class="navbar-link" href="addTp">{{ __('Szakember Hozzáadás') }}</a>
             </li>
             <li class="nav-item">
                 <a class="navbar-link" href="#">{{ __('Szakember Lista') }}</a>
