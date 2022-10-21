@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('addressId')->nullable();
             $table->text('introduction')->nullable();
             $table->tinyInteger('highlighted')->default(0);
-            $table->date('startDate')->nullable();
-            $table->date('endDate')->nullable();
+            //$table->date('startDate')->nullable();
+            //$table->date('endDate')->nullable();
             $table->integer('ratingSum')->default(0);
             $table->integer('ratingCount')->default(0);
             $table->timestamp('updated_at')->nullable();
