@@ -20,3 +20,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[TradespersonController::class,'index']);
 Route::get('/addTp',function(){return view('addTradesperson');});
+
+Route::post('/addTp',[TradespersonController::class,'addTradesperson']);
