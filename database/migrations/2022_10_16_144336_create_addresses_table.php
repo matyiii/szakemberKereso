@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('zipcode',5);
             $table->string('city',50);
+            $table->integer('tradesperson_id'); //kell-ez?
         });
     }
 
