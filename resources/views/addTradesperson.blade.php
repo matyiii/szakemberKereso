@@ -16,8 +16,11 @@
             <input type="text" id="trade" name="trade" class="form-control" value="teszttrade">
             <label for="prictures">Pictures:</label>
             <input type="file" id="prictures" name="prictures" class="form-control" multiple>
-            <br>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div id="highlighted">
+                <label for="highlighted">Highlighted person:</label>
+                <input type="checkbox" id="highlighted" name="highlighted" class="form-check-input">
+            </div>
+            <button type="submit" class="btn btn-primary" id="addTpSubmitBtn">Submit</button>
             @error('firstname', 'lastname')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
