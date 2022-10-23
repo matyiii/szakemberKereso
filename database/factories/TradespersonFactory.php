@@ -20,6 +20,7 @@ class TradespersonFactory extends Factory
             'firstname' => $this->faker->firstname,
             'lastname' => $this->faker->lastname,
             'introduction' => $this->faker->realText(20),
+            'highlighted' => $this->faker->numberBetween(0,1),
             'created_at' => $this->faker->time('H:i:s'),
             'updated_at' => $this->faker->time('H:i:s'),
         ];
