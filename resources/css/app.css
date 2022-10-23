@@ -33,3 +33,43 @@ body {
     padding: 10px;
     margin:auto;
 }
+
+#addTpSubmitBtn{
+    margin-top:20px;
+}
+
+div #highlighted{
+    padding-top:20px;
+}
+
+#mainContent{
+    display: flex;
+}
+
+/* Home Left col-3 */
+#left{
+    margin-top:100px;
+    padding-left:20px;
+    padding-right: 20px;
+    max-width: 300px;
+    text-align: center;
+}
+
+/* Home Right col-3 */
+#right{
+    margin-top:100px;
+    padding-left:20px;
+    max-width: 300px;
+    text-align: center;
+}
+
+
+/*Carousel color black*/
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}
+
+/* .carousel-control-prev, .carousel-control-next{
+    transform: translateY(-50%);
+} */
