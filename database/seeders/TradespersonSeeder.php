@@ -15,6 +15,6 @@ class TradespersonSeeder extends Seeder
      */
     public function run()
     {
-        Tradesperson::factory()->count(5)->create();
+        Tradesperson::factory()->count(20)->create();
     }
 }
