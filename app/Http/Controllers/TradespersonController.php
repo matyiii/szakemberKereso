@@ -10,9 +10,10 @@ use Illuminate\Http\Request;
 class TradespersonController extends Controller
 {
     public function index(){
-        $tradespersons = Tradesperson::all();
+        $tradespersons = Tradesperson::all()->take(10);
         //dd($tradespersons);
-        return view('home')->with('tradespersons',$tradespersons);
+        $highlightedTradespersons = $this->listHighlightedTps();
+        return view('home')->with('tradespersons',$tradespersons)->with('highlighted',$highlightedTradespersons);
     }
 
     public function addTradesperson(Request $request){
@@ -30,6 +31,7 @@ class TradespersonController extends Controller
 
         $tradespersons->firstname = $validatedData['firstname'];
         $tradespersons->lastname = $validatedData['lastname'];
+        $tradespersons->highlighted = is_null($request->input('highlighted')) ? '0':'1';
         $tradespersons->save();
 
         $professions->name = $validatedData['trade'];
@@ -38,5 +40,11 @@ class TradespersonController extends Controller
         $addresses->zipcode = $validatedData['zip'];
         $addresses->city = $validatedData['city'];
         $tradespersons->addressTp()->save($addresses);
+    }
+
+    public function listHighlightedTps(){
+        $data = Tradesperson::all()->where('highlighted',1);
+
+        return $data;
     }
 }
