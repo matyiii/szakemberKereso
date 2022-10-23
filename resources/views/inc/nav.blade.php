@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg" id="navbar">
-    <a href="#"><img id="szakilogo" src="{{ URL::to('/szakilogo.jpg') }}" alt="szakilogo"></a>
-    <a class="navbar-brand" href="#">{{ __('SzakemberKereső') }}</a>
+    <a href="{{ url('/') }}"><img id="szakilogo" src="{{ URL::to('/szakilogo.jpg') }}" alt="szakilogo"></a>
+    <a class="navbar-brand" href="{{ url('/') }}">{{ __('SzakemberKereső') }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
