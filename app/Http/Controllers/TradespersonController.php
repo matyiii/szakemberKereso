@@ -25,21 +25,41 @@ class TradespersonController extends Controller
             'trade' => 'required',
         ]);
         //dd($validatedData);
-        $tradespersons = new Tradesperson();
-        $addresses = new Address();
-        $professions = new Profession();
 
-        $tradespersons->firstname = $validatedData['firstname'];
-        $tradespersons->lastname = $validatedData['lastname'];
-        $tradespersons->highlighted = is_null($request->input('highlighted')) ? '0':'1';
-        $tradespersons->save();
+        $tradesperson = new Tradesperson();
+        $address = new Address();
+        $profession = new Profession();
 
-        $professions->name = $validatedData['trade'];
-        $tradespersons->professionsTp()->save($professions);
+        $tradesperson = Tradesperson::create([
+            'firstname' =>$validatedData['firstname'],
+            'lastname' => $validatedData['lastname'],
+            //'addressId' => '1',
+            'highlighted' => is_null($request->input('highlighted')) ? '0':'1',
+        ]);
 
-        $addresses->zipcode = $validatedData['zip'];
-        $addresses->city = $validatedData['city'];
-        $tradespersons->addressTp()->save($addresses);
+        $address = Address::firstOrCreate([
+            'zipcode' => $validatedData['zip'],
+            'city' => $validatedData['city'],
+            //'tradesperson_id' => $tradesperson->addressTp()->save($address)
+        ]);
+
+        $profession = Profession::create([
+            'name' => $validatedData['trade'],
+        ]);
+        dd([$tradesperson,$address,$profession]);
+
+/*         $tradesperson->firstname = $validatedData['firstname'];
+        $tradesperson->lastname = $validatedData['lastname'];
+        $tradesperson->highlighted = is_null($request->input('highlighted')) ? '0':'1';
+        $tradesperson->save();
+
+        $profession->name = $validatedData['trade'];
+        $tradesperson->professionsTp()->save($profession);
+
+        $address->zipcode = $validatedData['zip'];
+        $address->city = $validatedData['city'];
+        $tradesperson->addressTp()->save($address);
+        dd($address); */
     }
 
     public function listHighlightedTps(){
