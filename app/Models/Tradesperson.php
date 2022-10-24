@@ -11,7 +11,7 @@ class Tradesperson extends Model
 
     protected $table='tradespersons';
 
-    protected $fillabe=[
+    protected $fillable=[
         'firstname',
         'lastname',
         'addressId',
@@ -25,7 +25,7 @@ class Tradesperson extends Model
     }
 
     public function addressTp(){
-        return $this->hasOne(Address::class);
+        return $this->hasOne(Address::class,'tradesperson_id');
     }
 
     public function pictureTp(){
