@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('zipcode',5);
+            $table->string('zipcode',5); //->unique()
             $table->string('city',50);
-            $table->integer('tradesperson_id'); //kell-ez?
+            //$table->integer('tradesperson_id'); //kell-ez?
+            //$table->foreignId('tradesperson_id')->constrained('tradespersons');
         });
     }
 
