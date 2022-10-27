@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +18,11 @@ class TradespersonFactory extends Factory
      */
     public function definition()
     {
+        $addresses = Address::all()->pluck('id');
         return [
             'firstname' => $this->faker->firstname,
             'lastname' => $this->faker->lastname,
+            'addressId' => $this->faker->randomElement($addresses),
             'introduction' => $this->faker->realText(20),
             'highlighted' => $this->faker->numberBetween(0,1),
             'created_at' => $this->faker->time('H:i:s'),
