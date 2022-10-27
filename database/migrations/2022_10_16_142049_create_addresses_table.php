@@ -14,11 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('zipcode',5); //->unique()
+            $table->id();
+            $table->string('zipcode',5);
             $table->string('city',50);
-            //$table->integer('tradesperson_id'); //kell-ez?
-            //$table->foreignId('tradesperson_id')->constrained('tradespersons');
         });
     }
 
