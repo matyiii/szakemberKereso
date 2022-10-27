@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('firstname',30);
             $table->string('lastname',30);
-            $table->integer('addressId')->nullable();
+            $table->foreignId('addressId')->constrained('addresses');
             $table->text('introduction')->nullable();
             $table->tinyInteger('highlighted')->default(0);
             //$table->date('startDate')->nullable();
@@ -36,6 +36,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('tradespersons',function (Blueprint $table){
+            $table->dropForeign('tradespersons_addressId_foregin');
+        });//kell?
         Schema::dropIfExists('tradespersons');
     }
 };
