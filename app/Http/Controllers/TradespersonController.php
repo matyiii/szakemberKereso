@@ -25,8 +25,10 @@ class TradespersonController extends Controller
             'zip' => 'required|min_digits:4|max_digits:5',
             'city' => 'required',
             'trade' => 'required',
+            'trade2' => 'sometimes|required',
+            'trade3' => 'sometimes|required',
+            'introduction' => '',
         ]);
-        //dd($validatedData);
 
         $tradesperson = new Tradesperson();
         $address = new Address();
@@ -42,6 +44,7 @@ class TradespersonController extends Controller
             'lastname' => $validatedData['lastname'],
             //'addressId' => $tradesperson->addressTp()->save($address),
             'addressId' => Address::where('zipcode', $validatedData['zip'])->where('city', $validatedData['city'])->pluck('id')->first(),
+            'introduction' =>$validatedData['introduction'],
             'highlighted' => is_null($request->input('highlighted')) ? '0' : '1',
         ]);
 
