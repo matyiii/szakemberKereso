@@ -21,7 +21,7 @@ class Tradesperson extends Model
 
     public function professionsTp(){
         //return $this->belongsToMany(Profession::class);
-        return $this->belongsToMany(Tradesperson::class,'Tradesperson_professions','profession_id','tradesperson_id');
+        return $this->belongsToMany(Profession::class,'tradesperson_professions','profession_id','tradesperson_id');
     }
 
     public function addressTp(){
