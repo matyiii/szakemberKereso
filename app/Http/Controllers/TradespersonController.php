@@ -38,27 +38,32 @@ class TradespersonController extends Controller
             'zipcode' => $validatedData['zip'],
             'city' => $validatedData['city'],
         ]);
-        //TODO check is any trade exists in db before updateOrCreate/upsert
+
+        $profIDs = []; 
+        if(Profession::where('name',))
         if(!empty($validatedData['trade3'])){
-            $profession = Profession::updateOrCreate([ //upsert
+            $profession = Profession::upsert([
                 ['name' => $validatedData['trade']],['name' => $validatedData['trade2']],['name' => $validatedData['trade3']]],
                 ['name']
             );
+            $profIDs = [Profession::where('name',$validatedData['trade'])->pluck('id')->first(),
+                        Profession::where('name',$validatedData['trade2'])->pluck('id')->first(),
+                        Profession::where('name',$validatedData['trade3'])->pluck('id')->first()];
         }
         elseif(!empty($validatedData['trade2'])){
-            $profession = Profession::updateOrCreate([
-                ['name' => $validatedData['trade']],['name' => $validatedData['trade2']]],
+            $profession = Profession::upsert([
+                ['name' => $validatedData['trade']],
+                ['name' => $validatedData['trade2']]],
                 ['name']
             );
+            $profIDs = [Profession::where('name',$validatedData['trade'])->pluck('id')->first(),
+                        Profession::where('name',$validatedData['trade2'])->pluck('id')->first()];
         }
         else{
-            $profession = Profession::updateOrCreate([
-                ['name' => $validatedData['trade']]],
-                ['name']
-            );
+            $profession = Profession::firstOrCreate([
+                'name' => $validatedData['trade']
+            ]);
         }
-
-        //$profession->tradespersonProfession()->attach([1 => ['profession_id' => $profession->id]]);
         
         $tradesperson = Tradesperson::create([
             'firstname' => $validatedData['firstname'],
@@ -68,9 +73,10 @@ class TradespersonController extends Controller
             'introduction' =>$validatedData['introduction'],
             'highlighted' => is_null($request->input('highlighted')) ? '0' : '1',
         ]);
-        //$tradesperson->professionsTp()->attach('tradesperson_id');
-        $tradesperson->professionsTp()->attach([1 => ['tradesperson_id' => $tradesperson->id]]);
-        
+
+        foreach($profIDs as $id){
+            $tradesperson->professionsTp()->attach([$tradesperson->id => ['profession_id' => $id]]);
+        }
         dd([$tradesperson, $address, $profession]);
     }
 
