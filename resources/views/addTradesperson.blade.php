@@ -27,9 +27,12 @@
             </div>
             <label for="introduction">{{ __('Introduction') }}:</label>
             <textarea id="introduction" name="introduction" class="form-control"
-                value="{{ old('introduction', 'Tesztintroduction') }}"></textarea>
-            <label for="prictures">{{ __('Pictures') }}:</label>
-            <input type="file" id="prictures" name="prictures" class="form-control" multiple>
+                value="{{ old('introduction', 'Tesztintroduction') }}">
+            </textarea>
+            <label for="profilePic">{{ __("Profile picture:" )}}</label>
+            <input type="file" id="profilePic" name="profilePic" class="form-control">
+            <label for="references">{{ __('References') }}:</label>
+            <input type="file" id="picreferencestures" name="references[]" class="form-control" multiple>
             <div id="highlighted">
                 <label for="highlighted">{{ __('Highlighted person') }}:</label>
                 <input type="checkbox" id="highlighted" name="highlighted" class="form-check-input">
@@ -47,6 +50,11 @@
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
+            </div>
+        @endif
+        @if (session()->has('tpAdded'))
+            <div class="alert alert-success mt-4" style="font-weight: bold">
+                {{ session()->get('tpAdded') }}
             </div>
         @endif
     </div>
