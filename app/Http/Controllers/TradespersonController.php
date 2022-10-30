@@ -15,7 +15,8 @@ class TradespersonController extends Controller
         $tradespersons = Tradesperson::all()->take(10);
         //dd($tradespersons);
         $highlightedTradespersons = $this->listHighlightedTps();
-        return view('home')->with('tradespersons', $tradespersons)->with('highlighted', $highlightedTradespersons);
+        $trades = Profession::all()->take(10);
+        return view('home')->with('tradespersons', $tradespersons)->with('highlighted', $highlightedTradespersons)->with('trades',$trades);
     }
 
     public function addTradesperson(Request $request)
