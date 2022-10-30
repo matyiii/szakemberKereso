@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('pictures', function (Blueprint $table) {
             $table->id();
-            $table->integer('tradesperson_id');
+            $table->foreignId('tradesperson_id')->constrained('tradespersons');
             $table->binary('file');
-            $table->boolean('isItProfilePicture');
+            $table->boolean('isItProfilePicture')->default(0);
         });
     }
 
