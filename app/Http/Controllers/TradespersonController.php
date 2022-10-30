@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profession;
 use App\Models\Tradesperson;
 use App\Models\Address;
+use App\Models\Picture;
 use Illuminate\Http\Request;
 
 class TradespersonController extends Controller
@@ -28,11 +29,14 @@ class TradespersonController extends Controller
             'trade2' => 'sometimes|required',
             'trade3' => 'sometimes|required',
             'introduction' => '',
+            'profilePic' => 'nullable',
+            'references.*' => 'nullable'
         ]);
 
         $tradesperson = new Tradesperson();
         $address = new Address();
         $profession = new Profession();
+        $pictures = new Picture();
 
         $address = Address::firstOrCreate([
             'zipcode' => $validatedData['zip'],
@@ -63,6 +67,7 @@ class TradespersonController extends Controller
             $profession = Profession::firstOrCreate([
                 'name' => $validatedData['trade']
             ]);
+            $profIDs = [Profession::where('name',$validatedData['trade'])->pluck('id')->first()];
         }
         
         $tradesperson = Tradesperson::create([
@@ -74,10 +79,29 @@ class TradespersonController extends Controller
             'highlighted' => is_null($request->input('highlighted')) ? '0' : '1',
         ]);
 
+        if(!is_null($request->input('profilePic'))){
+            Picture::firstOrCreate([
+                'tradesperson_id' => Tradesperson::where('firstname', $validatedData['firstname'])->where('lastname', $validatedData['lastname'])->pluck('id')->first(),
+                'file' => $validatedData['profilePic'],
+                'isItProfilePicture' => 1
+            ]);
+        }
+        
+        if(!is_null($request->input('references')[0])){
+            foreach($request->input('references') as $pic){
+                $pictures = Picture::firstOrCreate([
+                    //'tradesperson_id' => $tradesperson->pictureTp()->save($tradesperson),
+                    'tradesperson_id' => Tradesperson::where('firstname', $validatedData['firstname'])->where('lastname', $validatedData['lastname'])->pluck('id')->first(),
+                    'file' => $pic,
+                ]);
+            }
+        }
+
         foreach($profIDs as $id){
             $tradesperson->professionsTp()->attach([$tradesperson->id => ['profession_id' => $id]]);
         }
-        dd([$tradesperson, $address, $profession]);
+        //dd([$tradesperson, $address, $profession]);
+        return redirect()->back()->with('tpAdded','Tradesperson added successfully');
     }
 
     public function listHighlightedTps()
