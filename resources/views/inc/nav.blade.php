@@ -11,7 +11,7 @@
                 <a class="navbar-link" href="addTp">{{ __('Szakember Hozzáadás') }}</a>
             </li>
             <li class="nav-item">
-                <a class="navbar-link" href="#">{{ __('Szakember Lista') }}</a>
+                <a class="navbar-link" href="listAllTp">{{ __('Szakember Lista') }}</a>
             </li>
             <li class="nav-item">
                 <a class="navbar-link" href="#">{{ __('Belépés') }}</a>
