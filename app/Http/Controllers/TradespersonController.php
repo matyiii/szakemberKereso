@@ -7,6 +7,7 @@ use App\Models\Tradesperson;
 use App\Models\Address;
 use App\Models\Picture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TradespersonController extends Controller
 {
@@ -110,5 +111,54 @@ class TradespersonController extends Controller
         $data = Tradesperson::all()->where('highlighted', 1);
 
         return $data;
+    }
+
+    public function listAllTp()
+    {
+        $data = [];
+        $data['allTp'] = DB::table('tradespersons')
+        ->leftJoin('addresses','tradespersons.addressId','=','addresses.id')
+        ->leftJoin('tradesperson_professions','tradespersons.id','=','tradesperson_professions.tradesperson_id')
+        ->leftJoin('pictures','tradespersons.id','=','pictures.tradesperson_id')
+        ->leftJoin('professions','tradesperson_professions.profession_id','=','professions.id')
+        ->select('tradespersons.id','firstname','lastname','introduction','city','zipcode','file','professions.name as tradeName')
+        ->get();
+        $data['pictures'] = base64_encode(DB::table('pictures')->select('file')->get());
+        return view('tradespersonList')->with('allTp',$data['allTp'])->with('pictures',$data['pictures']);
+    }
+
+    public function getTradespersonData($tradespersonId)
+    {
+        $selectedTradesPerson= DB::table('tradespersons')
+        ->leftJoin('addresses','tradespersons.addressId','=','addresses.id')
+        ->select('tradespersons.id','firstname','lastname','introduction','city','zipcode')
+        ->where('tradespersons.id',$tradespersonId)
+        ->get();
+        $html="";
+        if(!empty($selectedTradesPerson)){
+            $html = "<tr>
+                 <td width='30%'><b>ID:</b></td>
+                 <td width='70%'> ".$selectedTradesPerson->id."</td>
+              </tr>
+              <tr>
+                 <td width='30%'><b>Name:</b></td>
+                 <td width='70%'> ".$selectedTradesPerson->firstname.' '.$selectedTradesPerson->lastname."</td>
+              </tr>
+              <tr>
+                 <td width='30%'><b>ZIP:</b></td>
+                 <td width='70%'> ".$selectedTradesPerson->zipcode."</td>
+              </tr>
+              <tr>
+                 <td width='30%'><b>City:</b></td>
+                 <td width='70%'> ".$selectedTradesPerson->city."</td>
+              </tr>
+              <tr>
+                 <td width='30%'><b>Introduction:</b></td>
+                 <td width='70%'> ".$selectedTradesPerson->introduction."</td>
+              </tr>";
+         }
+         $response['html'] = $html;
+   
+         return response()->json($response);
     }
 }
