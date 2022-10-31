@@ -24,41 +24,42 @@ body {
 .nav-item {
     padding: 10px;
 }
-.navbar-link{
+
+.navbar-link {
     text-decoration: none;
     color: black;
 }
 
-#addTpForm{
+#addTpForm {
     padding: 10px;
-    margin:auto;
+    margin: auto;
 }
 
-#addTpSubmitBtn{
-    margin-top:20px;
+#addTpSubmitBtn {
+    margin-top: 20px;
 }
 
-div #highlighted{
-    padding-top:20px;
+div #highlighted {
+    padding-top: 20px;
 }
 
-#mainContent{
+#mainContent {
     display: flex;
 }
 
 /* Home Left col-3 */
-#left{
-    margin-top:100px;
-    padding-left:20px;
+#left {
+    margin-top: 100px;
+    padding-left: 20px;
     padding-right: 20px;
     max-width: 300px;
     text-align: center;
 }
 
 /* Home Right col-3 */
-#right{
-    margin-top:100px;
-    padding-left:20px;
+#right {
+    margin-top: 100px;
+    padding-left: 20px;
     max-width: 300px;
     text-align: center;
 }
@@ -66,10 +67,42 @@ div #highlighted{
 
 /*Carousel color black*/
 .carousel-control-next,
-.carousel-control-prev /*, .carousel-indicators */ {
+.carousel-control-prev
+
+/*, .carousel-indicators */
+    {
     filter: invert(100%);
 }
 
 /* .carousel-control-prev, .carousel-control-next{
     transform: translateY(-50%);
 } */
+
+/* tradespersonList CSS */
+/* #tradespersonList{
+    margin: auto;
+    width: 70%;
+} */
+
+.card {
+    background: #222;
+    border: 1px solid #dd2476;
+    margin-bottom: 2rem;
+}
+
+/* .card-img-top {
+    height: 200px;
+} */
+
+.btn {
+    border: 5px solid;
+    border-image-slice: 1;
+    text-decoration: none;
+    transition: all .4s ease;
+}
+
+.btn:hover,
+.btn:focus {
+    box-shadow: #222 1px 0 10px;
+    text-decoration: none;
+}
