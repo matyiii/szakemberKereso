@@ -133,7 +133,20 @@ class TradespersonController extends Controller
         ->leftJoin('addresses','tradespersons.addressId','=','addresses.id')
         ->select('tradespersons.id','firstname','lastname','introduction','city','zipcode')
         ->where('tradespersons.id',$tradespersonId)
+        ->first();
+        $tradesId = DB::table('tradesperson_professions')
+        ->select('profession_id')
+        ->where('tradesperson_professions.tradesperson_id','=',$selectedTradesPerson->id)
         ->get();
+        $tradesIdArr = [];
+        foreach($tradesId as $t)
+        {
+            array_push($tradesIdArr,$t->profession_id);
+        }
+        $tradesNames = DB::table('professions')
+        ->select('name')
+        ->whereIn('id',$tradesIdArr)
+        ->get()->pluck("name")->toArray();
         $html="";
         if(!empty($selectedTradesPerson)){
             $html = "<tr>
@@ -153,12 +166,15 @@ class TradespersonController extends Controller
                  <td width='70%'> ".$selectedTradesPerson->city."</td>
               </tr>
               <tr>
+                 <td width='30%'><b>Trades:</b></td>
+                 <td width='70%'> ".implode(',',$tradesNames)."</td>
+              </tr>
+              <tr>
                  <td width='30%'><b>Introduction:</b></td>
                  <td width='70%'> ".$selectedTradesPerson->introduction."</td>
               </tr>";
          }
          $response['html'] = $html;
-   
          return response()->json($response);
     }
 }
