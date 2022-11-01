@@ -24,3 +24,7 @@ Route::get('/listAllTp',[TradespersonController::class,'listAllTp']);
 Route::get('/getTradespersonData/{tradespersonId}',[TradespersonController::class,'getTradespersonData'])->name('getTradespersonData');
 
 Route::post('/addTp',[TradespersonController::class,'addTradesperson']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
