@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TradespersonController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,6 @@ Route::get('/getTradespersonData/{tradespersonId}',[TradespersonController::clas
 
 Route::post('/addTp',[TradespersonController::class,'addTradesperson']);
 
-Auth::routes();
+Route::get('/login', [App\Http\Controllers\HomeController::class, 'index'])->name('login');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
