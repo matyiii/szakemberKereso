@@ -6,27 +6,21 @@ $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
-#szakilogo {
-    height: 100px;
-    width: 100px;
-}
-
-body {
-    min-height: 100vh;
-}
-
-.footer {
-    background-color: blanchedalmond;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 5%;
-}
-
+//Navbar
 #navbar {
     background-color: blanchedalmond;
     padding-top: 0px;
     padding-bottom: 0px;
+}
+
+#navContainer {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+#szakilogo {
+    height: 100px;
+    width: 100px;
 }
 
 .nav-item {
@@ -36,6 +30,10 @@ body {
 .navbar-link {
     text-decoration: none;
     color: black;
+}
+
+a.navbar-brand {
+    margin-left: 16px;
 }
 
 #addTpForm {
@@ -51,8 +49,9 @@ div #highlighted {
     padding-top: 20px;
 }
 
-#mainContent {
-    display: flex;
+//Body
+body {
+    min-height: 100vh;
 }
 
 /* Home Left col-3 */
@@ -72,6 +71,9 @@ div #highlighted {
     text-align: center;
 }
 
+#mainContent {
+    display: flex;
+}
 
 /*Carousel color black*/
 .carousel-control-next,
