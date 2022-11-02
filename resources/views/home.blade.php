@@ -45,7 +45,21 @@
             </div>
         </div>
         <div class="col-6" id="middle">
-            <h1>TESZT</h1>
+            <div id="tradeSearch">
+                <form method="GET" action="/tradeSearch">
+                    @csrf
+                    <div class="form-row text-center">
+                        <div class="form-group col-md-6" id="tradeSelectPicker">
+                            <label for="tradeSearch">Trade:</label>
+                            <select class="selectpicker">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="col-3" id="right">
             <h3>{{ __('Trades') }}:</h3>
