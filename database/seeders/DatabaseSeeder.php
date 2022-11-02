@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             AddressSeeder::class,
             ProfessionSeeder::class,
             TradespersonSeeder::class,
-            PicturesSeeder::class,
+            //PicturesSeeder::class,
         ]);
     }
 }
