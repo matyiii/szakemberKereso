@@ -50,8 +50,8 @@
                     @csrf
                     <div class="form-row text-center">
                         <div class="form-group col-md-6" id="tradeSelectPicker">
-                            <label for="tradeSearch">Trade:</label>
-                            <select class="selectpicker">
+                            <label for="tradeSearch"> Select a Trade:</label>
+                            <select class="selectpicker" id="selectPicker" data-live-search="true" data-style="btn-info">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
