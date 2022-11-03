@@ -1,3 +1,4 @@
+import 'bootstrap-select';
 $(document).ready(function () {
     var tradeCount = 1
     $("#addTrade").on("click", function () {
@@ -29,5 +30,5 @@ $(document).ready(function () {
                 }
             });
         }
-    });
+    }); 
 });
