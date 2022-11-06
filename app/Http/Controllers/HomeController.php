@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Profession;
 use App\Models\Tradesperson;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -27,7 +29,10 @@ class HomeController extends Controller
     {
         $highlightedTradespersons = $this->listHighlightedTps();
         $trades = Profession::all()->take(10);
-        return view('home')->with('highlighted', $highlightedTradespersons)->with('trades',$trades);
+        $allProfession = $this->listAllProfession();
+        $allAddress = $this->listAllAddress();
+        return view('home')->with('highlighted', $highlightedTradespersons)->with('trades',$trades)->with('allProfession',$allProfession)
+            ->with('allAddress',$allAddress);
     }
 
     private function listHighlightedTps()
@@ -37,4 +42,14 @@ class HomeController extends Controller
         return $data;
     }
 
+    private function listAllProfession(){
+        $professions = Profession::all()->unique('name');
+        return $professions;
+    }
+
+    private function listAllAddress(){
+        $address = Address::all();
+        //dd($address);
+        return $address;
+    }
 }
