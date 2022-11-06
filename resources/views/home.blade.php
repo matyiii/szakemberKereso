@@ -48,15 +48,28 @@
             <div id="tradeSearch">
                 <form method="GET" action="/tradeSearch">
                     @csrf
-                    <div class="form-row text-center">
-                        <div class="form-group col-md-6" id="tradeSelectPicker">
-                            <label for="tradeSearch"> Select a Trade:</label>
-                            <select class="selectpicker" id="selectPicker" data-live-search="true" data-style="btn-info">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                        </div>
+                    <div class="col-md-6">
+                        <label for="tradeSelect">{{ __('Szakma kereső') }}</label>
+                        <select name="tradeSelect" class="form-select" id="tradeSelect">
+                            <option value="0">{{ __('Select Trade') }}</option>
+                            @foreach ($allProfession as $prof)
+                                <option value="{{ $prof->id }}">{{ $prof->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="mt-4" id="citySearch">
+                <form method="GET" action="/citySearch">
+                    @csrf
+                    <div class="col-md-6">
+                        <label for="citySelect">{{ __('Város kereső')}}</label>
+                        <select name="citySelect" class="form-select" id="citySelect">
+                            <option value="0">{{ __('Select City')}}</option>
+                            @foreach ($allAddress as $address)
+                                <option value="{{ $address->id }}">{{ $address->city }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </form>
             </div>
