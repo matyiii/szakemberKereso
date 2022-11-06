@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\TradespersonController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ListAllTpController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,13 +21,18 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 }); */
 
-Route::get('/',[TradespersonController::class,'index'])->name('home');
-Route::get('/addTp', function() {return view('addTradesperson');});
-Route::get('/listAllTp',[TradespersonController::class,'listAllTp']);
-Route::get('/getTradespersonData/{tradespersonId}',[TradespersonController::class,'getTradespersonData'])->name('getTradespersonData');
-
+#Home view
+Route::get('/',[HomeController::class,'index'])->name('home');
 Route::post('/addTp',[TradespersonController::class,'addTradesperson']);
 
-Route::get('/login', [App\Http\Controllers\HomeController::class, 'index'])->name('login');
+#addTradeperson view
+Route::get('/addTp', function() {return view('addTradesperson');});
+
+#listAllTp view
+Route::get('/listAllTp',[ListAllTpController::class,'listAllTp']);
+Route::get('/getTradespersonData/{tradespersonId}',[ListAllTpController::class,'getTradespersonData'])->name('getTradespersonData');
+
+#login view
+Route::get('/login', [HomeController::class, 'index'])->name('login');
 
 Auth::routes();

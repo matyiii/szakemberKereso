@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profession;
+use App\Models\Tradesperson;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $highlightedTradespersons = $this->listHighlightedTps();
+        $trades = Profession::all()->take(10);
+        return view('home')->with('highlighted', $highlightedTradespersons)->with('trades',$trades);
     }
+
+    private function listHighlightedTps()
+    {
+        $data = Tradesperson::all()->where('highlighted', 1);
+
+        return $data;
+    }
+
 }
