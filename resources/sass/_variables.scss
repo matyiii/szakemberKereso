@@ -55,25 +55,6 @@ body {
 }
 
 /* Home Left col-3 */
-#left {
-    margin-top: 100px;
-    padding-left: 20px;
-    padding-right: 20px;
-    max-width: 300px;
-    text-align: center;
-}
-
-/* Home Right col-3 */
-#right {
-    margin-top: 100px;
-    padding-left: 20px;
-    max-width: 300px;
-    text-align: center;
-}
-
-#mainContent {
-    display: flex;
-}
 
 /*Carousel color black*/
 .carousel-control-next,
@@ -120,4 +101,8 @@ body {
 #tradeSearch > form > div > div{
     margin: auto;
     padding-top: 200px;
+}
+
+#app > main{
+    margin-bottom: 50px;
 }
