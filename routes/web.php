@@ -22,17 +22,21 @@ use Illuminate\Support\Facades\Route;
 }); */
 
 #Home view
-Route::get('/',[HomeController::class,'index'])->name('home');
-Route::post('/addTp',[TradespersonController::class,'addTradesperson']);
+Route::middleware('auth')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
+    Route::post('/addTp', [TradespersonController::class, 'addTradesperson']);
 
-#addTradeperson view
-Route::get('/addTp', function() {return view('addTradesperson');});
+    #addTradeperson view
+    Route::get('/addTp', function () {
+        return view('addTradesperson');
+    })->middleware('auth');
 
-#listAllTp view
-Route::get('/listAllTp',[ListAllTpController::class,'listAllTp']);
-Route::get('/getTradespersonData/{tradespersonId}',[ListAllTpController::class,'getTradespersonData'])->name('getTradespersonData');
+    #listAllTp view
+    Route::get('/listAllTp', [ListAllTpController::class, 'listAllTp'])->withoutMiddleware('auth');
+    Route::get('/getTradespersonData/{tradespersonId}', [ListAllTpController::class, 'getTradespersonData'])->name('getTradespersonData')->withoutMiddleware('auth');
 
-#login view
-Route::get('/login', [HomeController::class, 'index'])->name('login');
+    #login view
+    Route::get('/login', [HomeController::class, 'index'])->name('login');
+});
 
 Auth::routes();
