@@ -4,8 +4,8 @@
     <div class="container mx-auto mt-5" id="tradespersonList">
         <div class="row">
             @foreach ($allTp as $tp)
-                <div class="col-md-4">
-                    <div class="card" style="width: 20rem;">
+                <div class="col-md-2">
+                    <div class="card" style="width: 10rem;">
                         <img src="https://via.placeholder.com/100" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ $tp->firstname }} {{ $tp->lastname }}</h5>
