@@ -21,15 +21,15 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 }); */
 
-#Home view
 Route::middleware('auth')->group(function () {
+    #Home view
     Route::get('/', [HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
     Route::post('/addTp', [TradespersonController::class, 'addTradesperson']);
 
     #addTradeperson view
     Route::get('/addTp', function () {
         return view('addTradesperson');
-    })->middleware('auth');
+    });
 
     #listAllTp view
     Route::get('/listAllTp', [ListAllTpController::class, 'listAllTp'])->withoutMiddleware('auth');
