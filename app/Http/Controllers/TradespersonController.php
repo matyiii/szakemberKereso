@@ -33,7 +33,7 @@ class TradespersonController extends Controller
         ]);
 
         $tradesperson = new Tradesperson();
-        $address = new Address();
+        //$address = new Address();
         $profession = new Profession();
         $pictures = new Picture();
 
@@ -72,15 +72,16 @@ class TradespersonController extends Controller
         $tradesperson = Tradesperson::create([
             'firstname' => $validatedData['firstname'],
             'lastname' => $validatedData['lastname'],
-            //'addressId' => $tradesperson->addressTp()->save($address),
-            'addressId' => Address::where('zipcode', $validatedData['zip'])->where('city', $validatedData['city'])->pluck('id')->first(),
+            'addressId' => $address->id,
+            //'addressId' => Address::where('zipcode', $validatedData['zip'])->where('city', $validatedData['city'])->pluck('id')->first(),
             'introduction' =>$validatedData['introduction'],
             'highlighted' => is_null($request->input('highlighted')) ? '0' : '1',
         ]);
 
         if(!is_null($request->input('profilePic'))){
             Picture::firstOrCreate([
-                'tradesperson_id' => Tradesperson::where('firstname', $validatedData['firstname'])->where('lastname', $validatedData['lastname'])->pluck('id')->first(),
+                //'tradesperson_id' => Tradesperson::where('firstname', $validatedData['firstname'])->where('lastname', $validatedData['lastname'])->pluck('id')->first(),
+                'tradesperson_id' => $tradesperson->id,
                 'file' => $validatedData['profilePic'],
                 'isItProfilePicture' => 1
             ]);
