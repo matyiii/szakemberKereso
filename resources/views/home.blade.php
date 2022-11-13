@@ -74,7 +74,7 @@
                 </form>
             </div>
             <div class="mt-4">
-                <a href="#" class="btn btn-primary btn-lg">{{ __('SEARCH') }}</a>
+                <a href="#" id="searchBtn" class="btn btn-primary btn-lg">{{ __('SEARCH') }}</a>
             </div>
         </div>
         <div class="col-3" id="right">
