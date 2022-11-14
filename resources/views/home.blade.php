@@ -25,6 +25,11 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $person->firstname }} {{ $person->lastname }}</h5>
                                     <p class="card-text">{{ $person->trade == '' ? 'No trade' : $person->trade }}</p>
+                                    <p class="card-text">
+                                        @foreach ($person->professionsTp as $item)
+                                            {{ $item->name }}
+                                        @endforeach
+                                    </p>
                                     <p class="card-text">{{ $person->introduction }}</p>
                                     <a href="#" class="btn btn-secondary">{{ __('Details') }}</a>
                                 </div>
@@ -74,7 +79,7 @@
                 </form>
             </div>
             <div class="mt-4">
-                <a href="#" id="searchBtn" class="btn btn-primary btn-lg">{{ __('SEARCH') }}</a>
+                <a href="" id="searchBtn" class="btn btn-primary btn-lg">{{ __('SEARCH') }}</a>
             </div>
         </div>
         <div class="col-3" id="right">
