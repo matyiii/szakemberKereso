@@ -8,12 +8,21 @@ $(window).ready(function () {
         $("#citySelect").select2({
         });
 
-        $("#searchBtn").on("click",function(){
-            let selectedTrade =  $("#tradeSelect").val();
+        $("#searchBtn").on("click", function (e) {
+            e.preventDefault(); //teszteléshez
+            let selectedTrade = $("#tradeSelect").val();
             let selectedCity = $("#citySelect").val();
+            console.log(`${selectedCity}, ${selectedTrade}`);
             $.ajax({
-                type:"POST",
-                /* TODO */
+                type: "GET",
+                url:`/getSearchedData`,
+                data:{
+                    selectedTrade : 'selectedTrade',
+                    selectedCity : 'selectedCity',
+                },
+                success: function(response){
+                    console.log(response);
+                }
             })
         });
     }
