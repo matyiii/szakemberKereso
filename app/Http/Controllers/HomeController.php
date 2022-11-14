@@ -37,7 +37,8 @@ class HomeController extends Controller
 
     private function listHighlightedTps()
     {
-        $data = Tradesperson::all()->where('highlighted', 1);
+        //$data = Tradesperson::all()->where('highlighted', 1);
+        $data = Tradesperson::with(['professionsTp'])->get()->where('highlighted', 1);
 
         return $data;
     }
