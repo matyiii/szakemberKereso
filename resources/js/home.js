@@ -1,7 +1,7 @@
 import axios from "axios";
 
 $(window).ready(function () {
-    if (window.location.href == "http://127.0.0.1:8000/") { //localhost:8000/#
+    if (window.location.pathname == "/") {
         $("#tradeSelect").select2({
         });
 
@@ -12,16 +12,16 @@ $(window).ready(function () {
             e.preventDefault(); //teszteléshez
             let selectedTrade = $("#tradeSelect").val();
             let selectedCity = $("#citySelect").val();
-            console.log(`${selectedCity}, ${selectedTrade}`);
             $.ajax({
                 type: "GET",
                 url:`/getSearchedData`,
                 data:{
-                    selectedTrade : 'selectedTrade',
-                    selectedCity : 'selectedCity',
+                    selectedTrade : selectedTrade,
+                    selectedCity : selectedCity,
                 },
                 success: function(response){
                     console.log(response);
+                    //window.location = "http://127.0.0.1:8000/listAllTp";
                 }
             })
         });
