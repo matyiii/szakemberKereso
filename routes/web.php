@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     });
 
     #listAllTp view
-    Route::get('/listAllTp', [ListAllTpController::class, 'listAllTp'])->withoutMiddleware('auth');
+    Route::get('/listAllTp', [ListAllTpController::class, 'listAllTp'])->name('allTp')->withoutMiddleware('auth');
     Route::get('/getTradespersonData/{tradespersonId}', [ListAllTpController::class, 'getTradespersonData'])->name('getTradespersonData')->withoutMiddleware('auth');
     Route::get('/getSearchedData',[ListAllTpController::class,'getSearchedData'])->name('getSearchedData')->withoutMiddleware('auth');
 
