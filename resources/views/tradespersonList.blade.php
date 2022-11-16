@@ -10,12 +10,12 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $tp->firstname }} {{ $tp->lastname }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Id: {{ $tp->id }}</h6> {{-- Értékelés jöhet ide --}}
-                            {{-- <p class="card-text">{{ $tp->tradeName }}</p> --}}
-                            <p class="card-text">
+                            <p class="card-text">{{ $tp->tradeName }}</p>
+{{--                             <p class="card-text">
                                 @foreach ($tp->professionsTp as $item)
                                     {{ $item->name }}
                                 @endforeach
-                            </p>
+                            </p> --}}
                             <button type="button" class="btn btn-primary openmodal" data-bs-toggle="modal" id="detailsBtn"
                                 data-id="{{ $tp->id }}" data-bs-target="#exampleModal">
                                 {{ __('Details') }}
