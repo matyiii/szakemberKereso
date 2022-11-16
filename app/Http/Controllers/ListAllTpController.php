@@ -11,7 +11,7 @@ class ListAllTpController extends Controller
    public function listAllTp()
    {
       $data = [];
-/*       $data['allTp'] = DB::table('tradespersons')
+      /*       $data['allTp'] = DB::table('tradespersons')
         ->leftJoin('addresses','tradespersons.addressId','=','addresses.id')
         ->leftJoin('tradesperson_professions','tradespersons.id','=','tradesperson_professions.tradesperson_id')
         ->leftJoin('pictures','tradespersons.id','=','pictures.tradesperson_id')
@@ -74,29 +74,23 @@ class ListAllTpController extends Controller
       return response()->json($response);
    }
 
-   public function getSearchedData(Request $request){
+   public function getSearchedData(Request $request)
+   {
       $selectedTrade = $request->selectedTrade;
       $selectedCity = $request->selectedCity;
 
       $data = [];
-      $data['result'] = Tradesperson::with('professionsTp')
-/*          ->when($selectedCity != 0, function ($query) use ($selectedCity){
-            return $query->where('addresses.id',$selectedCity);
-         })
-         ->latest()  */  
-         ->get();
-         
-      /* DB::table('tradespersons')
-         ->leftJoin('addresses','tradespersons.addressId','=','addresses.id')
-         ->leftJoin('tradesperson_professions','tradespersons.id','=','tradesperson_professions.tradesperson_id')
-         ->leftJoin('pictures','tradespersons.id','=','pictures.tradesperson_id')
-         ->leftJoin('professions','tradesperson_professions.profession_id','=','professions.id')
-         ->when($selectedCity != 0, function ($query) use ($selectedCity){
-            return $query->where('addresses.id',$selectedCity);
-         })
-         ->latest()
+      $data['allTp'] = /* Tradesperson::with('professionsTp')
          ->get(); */
-      dd($data['result']);
-      return $data["result"];
+
+         DB::table('tradespersons')
+         ->leftJoin('addresses', 'tradespersons.addressId', '=', 'addresses.id')
+         ->leftJoin('tradesperson_professions', 'tradespersons.id', '=', 'tradesperson_professions.tradesperson_id')
+         ->leftJoin('pictures', 'tradespersons.id', '=', 'pictures.tradesperson_id')
+         ->leftJoin('professions', 'tradesperson_professions.profession_id', '=', 'professions.id')
+         ->select('tradespersons.id', 'firstname', 'lastname', 'introduction', 'city', 'zipcode', 'addresses.id', 'professions.name as tradeName')
+         ->where('addresses.id', $selectedCity)
+         ->get();
+      return view('tradespersonList')->with('allTp', $data["allTp"]);
    }
 }
