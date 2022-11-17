@@ -51,8 +51,7 @@
         </div>
         <div class="col-6" id="middle">
             <div id="tradeSearch">
-                <form method="GET" action="/tradeSearch">
-                    @csrf
+                <form method="GET" action="{{ route('getSearchedData') }}">
                     <div class="col-md-6">
                         <label for="tradeSelect">{{ __('Szakma kereső') }}</label>
                         <select name="tradeSelect" class="form-select" id="tradeSelect">
@@ -61,25 +60,19 @@
                                 <option value="{{ $prof->id }}">{{ $prof->name }}</option>
                             @endforeach
                         </select>
+
+                        <div class="col-md-6">
+                            <label for="citySelect">{{ __('Város kereső') }}</label>
+                            <select name="citySelect" class="form-select" id="citySelect">
+                                <option value="0">{{ __('Select City') }}</option>
+                                @foreach ($allAddress as $address)
+                                    <option value="{{ $address->id }}">{{ $address->city }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
+                    <button type="submit" id="searchBtn" class="btn btn-primary btn-lg">{{ __('SEARCH') }}</button>
                 </form>
-            </div>
-            <div class="mt-4" id="citySearch">
-                <form method="GET" action="/citySearch">
-                    @csrf
-                    <div class="col-md-6">
-                        <label for="citySelect">{{ __('Város kereső') }}</label>
-                        <select name="citySelect" class="form-select" id="citySelect">
-                            <option value="0">{{ __('Select City') }}</option>
-                            @foreach ($allAddress as $address)
-                                <option value="{{ $address->id }}">{{ $address->city }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="mt-4">
-                <a href="" id="searchBtn" class="btn btn-primary btn-lg">{{ __('SEARCH') }}</a>
             </div>
         </div>
         <div class="col-3" id="right">
