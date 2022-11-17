@@ -13,6 +13,6 @@ class Address extends Model
     protected $fillable=['zipcode','city'];
 
     public function tradespersonAddress(){
-        return $this->belongsToMany(Tradesperson::class,'addressId');
+        return $this->hasMany(Tradesperson::class,'addressId');
     }
 }
