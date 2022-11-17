@@ -20,7 +20,6 @@ class ListAllTpController extends Controller
         ->get(); */
       $data["allTp"] = Tradesperson::with(['professionsTp', 'addressTp'])->get();
       //dd($data['allTp']);
-
       $data['pictures'] = base64_encode(DB::table('pictures')->select('file')->get());
       return view('tradespersonList')->with('allTp', $data['allTp'])->with('pictures', $data['pictures']);
    }
@@ -80,17 +79,17 @@ class ListAllTpController extends Controller
       $selectedCity = $request->selectedCity;
 
       $data = [];
-      $data['allTp'] = /* Tradesperson::with('professionsTp')
-         ->get(); */
 
-         DB::table('tradespersons')
-         ->leftJoin('addresses', 'tradespersons.addressId', '=', 'addresses.id')
-         ->leftJoin('tradesperson_professions', 'tradespersons.id', '=', 'tradesperson_professions.tradesperson_id')
-         ->leftJoin('pictures', 'tradespersons.id', '=', 'pictures.tradesperson_id')
-         ->leftJoin('professions', 'tradesperson_professions.profession_id', '=', 'professions.id')
-         ->select('tradespersons.id', 'firstname', 'lastname', 'introduction', 'city', 'zipcode', 'addresses.id', 'professions.name as tradeName')
-         ->where('addresses.id', $selectedCity)
-         ->get();
+      $data['allTp'] = Tradesperson::with(['addressTp' => function($query) use ($selectedCity){
+         $query->where('id', '=', $selectedCity);
+      }])->get();
+
+/*       $data['allTp'] = Tradesperson::with(['professionsTp' => function($query,Request $request){
+         $query->where('professions.id','=', $request->selectedTrade);
+      }, 'addressTp'])->get(); */
+      dd($data["allTp"]);
+      dd($data["allTp"][0]->addressTp);
+
       return view('tradespersonList')->with('allTp', $data["allTp"]);
    }
 }
