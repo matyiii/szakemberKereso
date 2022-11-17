@@ -25,7 +25,8 @@ class Tradesperson extends Model
     }
 
     public function addressTp(){
-        return $this->hasOne(Address::class,'id');
+        //return $this->hasOne(Address::class,'id');
+        return $this->belongsTo(Address::class,'addressId');
     }
 
     public function pictureTp(){
