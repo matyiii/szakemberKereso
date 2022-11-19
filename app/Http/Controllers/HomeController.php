@@ -7,6 +7,7 @@ use App\Models\Profession;
 use App\Models\Tradesperson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\HelperController;
 
 class HomeController extends Controller
 {
@@ -52,5 +53,21 @@ class HomeController extends Controller
         $address = Address::all();
         //dd($address);
         return $address;
+    }
+
+    public function listSelectedTrade($professionId){
+        $data["allTp"] =  DB::table('tradespersons')
+        ->leftJoin('addresses','tradespersons.addressId','=','addresses.id')
+        ->leftJoin('tradesperson_professions','tradespersons.id','=','tradesperson_professions.tradesperson_id')
+        ->leftJoin('professions','tradesperson_professions.profession_id','=','professions.id')
+        ->select('tradespersons.id','firstname','lastname','introduction','city','zipcode','professions.name as tradeName')
+        ->where('professions.id',$professionId)
+        ->get();
+
+        $helper = new HelperController;
+
+        $helper->AddTradesToPersons($data["allTp"]);
+
+        return view('tradespersonList')->with('allTp', $data["allTp"]);;
     }
 }
