@@ -78,7 +78,8 @@
         <div class="col-3" id="right">
             <h3>{{ __('Trades') }}:</h3>
             @foreach ($trades as $trade)
-                <p>{{ $trade->name }}</p>
+                <a id="trades" class="link-info" href="{{ route('listAllTp',$trade->id) }}">{{ $trade->name }}</a>
+                <br>
             @endforeach
         </div>
     </div>
