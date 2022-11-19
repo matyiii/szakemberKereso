@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Profession;
 use App\Models\Tradesperson;
-use App\Models\Tradesperson_profession;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class ListAllTpController extends Controller
@@ -16,23 +13,14 @@ class ListAllTpController extends Controller
       $data = [];
       $data["allTp"] = Tradesperson::select('tradespersons.id', 'firstname', 'lastname')->get();
 
-      //Collect trades
-      $tradesIdArr = [];
-      foreach ($data["allTp"] as $person) {
-         $ids = Tradesperson_profession::select('profession_id')
-            ->where('tradesperson_id', $person->id)
-            ->get('profession_id')->pluck('profession_id')->toArray();
+      $helper = new HelperController;
 
-         $tradesIdArr = Arr::add($tradesIdArr, $person->id, $ids);
-      }
-      //Add trades to person
-      foreach ($data["allTp"] as $person) {
-         $person->tradeName = Profession::select('name')->whereIn('id', $tradesIdArr[$person->id])->get()->pluck('name');
-      }
+      $helper->AddTradesToPersons($data["allTp"]);
 
       //$data["allTp"] = Tradesperson::with(['professionsTp', 'addressTp'])->get();
 
-      $data['pictures'] = base64_encode(DB::table('pictures')->select('file')->get());
+      $data['pictures'] = base64_encode(DB::table('pictures')->select('file')->get()); //TODO
+
       return view('tradespersonList')->with('allTp', $data['allTp'])->with('pictures', $data['pictures']);
    }
    public function getTradespersonData($tradespersonId)
@@ -89,7 +77,7 @@ class ListAllTpController extends Controller
    {
       $selectedTrade = $request->selectedTrade;
       $selectedCity = $request->selectedCity;
-
+      //dd($request);
       $data = [];
 
       $data['allTp'] = Tradesperson::with(['addressTp' => function ($query) use ($selectedCity) {
@@ -100,7 +88,6 @@ class ListAllTpController extends Controller
          $query->where('professions.id','=', $request->selectedTrade);
       }, 'addressTp'])->get(); */
       dd($data["allTp"]);
-      dd($data["allTp"][0]->addressTp);
 
       return view('tradespersonList')->with('allTp', $data["allTp"]);
    }
