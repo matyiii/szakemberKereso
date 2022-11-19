@@ -26,3 +26,15 @@
 #mainContent {
     display: flex;
 }
+
+#trades {
+    text-decoration: none;
+    font-weight: 900;
+    font-size: large;
+}
+
+#trades:hover {
+    box-shadow: inset 100px 0 0 0 #bcc1db;
+    color:white;
+    background-color: #bcc1db;
+  }
