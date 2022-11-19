@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     #Home view
     Route::get('/', [HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
     Route::post('/addTp', [TradespersonController::class, 'addTradesperson']);
+    Route::get('/listAllTp/{professionId}', [HomeController::class, 'listSelectedTrade'])->name('listAllTp')->withoutMiddleware('auth');
 
     #addTradeperson view
     Route::get('/addTp', function () {
