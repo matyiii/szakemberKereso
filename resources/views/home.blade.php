@@ -13,12 +13,11 @@
                                 <h5 class="card-title">{{ __('Firstname Lastname') }}</h5>
                                 <p class="card-text">{{ __('Trade') }}</p>
                                 <p class="card-text">{{ __('Introduction') }}</p>
-                                <a href="#" class="btn btn-secondary">{{ __('Details') }}</a>
                             </div>
                         </div>
                     </div>
                     @foreach ($highlighted as $person)
-                        <div class="carousel-item">
+                        <div class="carousel-item" data-id="{{ $person->id }}">
                             <div class="card">
                                 <img src="https://via.placeholder.com/200" class="d-block w-100"
                                     alt="tradespersonPlaceholder">
@@ -31,7 +30,6 @@
                                         @endforeach
                                     </p>
                                     <p class="card-text">{{ $person->introduction }}</p>
-                                    <a href="#" class="btn btn-secondary">{{ __('Details') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -61,15 +59,13 @@
                             @endforeach
                         </select>
 
-                        <div class="col-md-6">
-                            <label for="citySelect">{{ __('Város kereső') }}</label>
-                            <select name="citySelect" class="form-select" id="citySelect">
-                                <option value="0">{{ __('Select City') }}</option>
-                                @foreach ($allAddress as $address)
-                                    <option value="{{ $address->id }}">{{ $address->city }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <label for="citySelect">{{ __('Város kereső') }}</label>
+                        <select name="citySelect" class="form-select" id="citySelect">
+                            <option value="0">{{ __('Select City') }}</option>
+                            @foreach ($allAddress as $address)
+                                <option value="{{ $address->id }}">{{ $address->city }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" id="searchBtn" class="btn btn-primary btn-lg">{{ __('SEARCH') }}</button>
                 </form>
@@ -78,7 +74,7 @@
         <div class="col-3" id="right">
             <h3>{{ __('Trades') }}:</h3>
             @foreach ($trades as $trade)
-                <a id="trades" class="link-info" href="{{ route('listAllTp',$trade->id) }}">{{ $trade->name }}</a>
+                <a id="trades" class="link-info" href="{{ route('listAllTp', $trade->id) }}">{{ $trade->name }}</a>
                 <br>
             @endforeach
         </div>
