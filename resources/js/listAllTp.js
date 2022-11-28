@@ -1,5 +1,5 @@
 $(window).ready(function () {
-    if (window.location.pathname == "/listAllTp") {
+    if (window.location.pathname.match(/listAllTp.*/)) {
         $("#tradespersonList").on("click", ".openmodal", function () {
             let traderpersonId = $(this).attr('data-id');
 
