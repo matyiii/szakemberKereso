@@ -1,26 +1,42 @@
 #tradeSearch>form>div>div {
-    padding-top: 0px;
+    padding-top: 0.5em;
 }
 
 #middle {
     align-self: center;
     text-align: -webkit-center;
+    //padding-top: 7em;
 }
 
-#left {
-    margin-top: 50px;
-    padding-left: 20px;
-    padding-right: 20px;
-    max-width: 300px;
-    text-align: center;
+#left{
+    text-align:center;
+    padding-left: 8em;
+    padding-right: 6em;
+    padding-top: 3em;
+    height:8em;
 }
 
-/* Home Right col-3 */
 #right {
-    margin-top: 50px;
-    padding-left: 20px;
-    max-width: 300px;
+    margin-top: 3em;
+    padding-left: 6em;
+    padding-right: 10em;
     text-align: center;
+}
+#searchBtn{
+    margin-top: 2em;
+}
+
+#tradeSearch > form > div > label{
+    font-size:2em;
+}
+
+#tradeSearch > form > div > div > label
+{
+    font-size:2em;
+}
+
+#tradeSearch{
+    margin-top: 15em;
 }
 
 #mainContent {
@@ -37,4 +53,9 @@
     box-shadow: inset 100px 0 0 0 #bcc1db;
     color:white;
     background-color: #bcc1db;
-  }
+}
+
+
+.container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1920px;
+}
