@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/listAllTp', [ListAllTpController::class, 'listAllTp'])->name('allTp')->withoutMiddleware('auth');
     Route::get('/getTradespersonData/{tradespersonId}', [ListAllTpController::class, 'getTradespersonData'])->name('getTradespersonData')->withoutMiddleware('auth');
     Route::get('/getSearchedData',[ListAllTpController::class,'getSearchedData'])->name('getSearchedData')->withoutMiddleware('auth');
+    Route::delete('/delete/{tradespersonId}',[ListAllTpController::class,'deleteTradespersonById'])->name('deleteTradespersonById');
 
     #login view
     Route::get('/login', [HomeController::class, 'index'])->name('login');
