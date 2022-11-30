@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tradesperson;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ListAllTpController extends Controller
@@ -75,20 +76,64 @@ class ListAllTpController extends Controller
 
    public function getSearchedData(Request $request)
    {
-      $selectedTrade = $request->selectedTrade;
-      $selectedCity = $request->selectedCity;
-      //dd($request);
+      $selectedTrade = $request->tradeSelect;
+      $selectedCity = $request->citySelect;
+      
       $data = [];
 
-      $data['allTp'] = Tradesperson::with(['addressTp' => function ($query) use ($selectedCity) {
+      if($selectedTrade != 0 && $selectedCity != 0){
+         $data["allTp"] =  DB::table('tradespersons')
+         ->leftJoin('addresses','tradespersons.addressId','=','addresses.id')
+         ->leftJoin('tradesperson_professions','tradespersons.id','=','tradesperson_professions.tradesperson_id')
+         ->leftJoin('professions','tradesperson_professions.profession_id','=','professions.id')
+         ->select('tradespersons.id','firstname','lastname','introduction','city','zipcode','professions.name as tradeName')
+         ->where([['professions.id','',$selectedTrade],['addresses.id','',$selectedCity]])
+         ->get();
+      }
+      else if($selectedTrade != 0 && $selectedCity == 0){
+         $data["allTp"] =  DB::table('tradespersons')
+         ->leftJoin('addresses','tradespersons.addressId','=','addresses.id')
+         ->leftJoin('tradesperson_professions','tradespersons.id','=','tradesperson_professions.tradesperson_id')
+         ->leftJoin('professions','tradesperson_professions.profession_id','=','professions.id')
+         ->select('tradespersons.id','firstname','lastname','introduction','city','zipcode','professions.name as tradeName')
+         ->where('professions.id',$selectedTrade)
+         ->get();
+      }
+      else if($selectedTrade == 0 && $selectedCity != 0){
+         $data["allTp"] =  DB::table('tradespersons')
+         ->leftJoin('addresses','tradespersons.addressId','=','addresses.id')
+         ->leftJoin('tradesperson_professions','tradespersons.id','=','tradesperson_professions.tradesperson_id')
+         ->leftJoin('professions','tradesperson_professions.profession_id','=','professions.id')
+         ->select('tradespersons.id','firstname','lastname','introduction','city','zipcode','professions.name as tradeName')
+         ->where('addresses.id',$selectedCity)
+         ->get();
+      }
+      else{
+         $data["allTp"] =  DB::table('tradespersons')
+         ->leftJoin('addresses','tradespersons.addressId','=','addresses.id')
+         ->leftJoin('tradesperson_professions','tradespersons.id','=','tradesperson_professions.tradesperson_id')
+         ->leftJoin('professions','tradesperson_professions.profession_id','=','professions.id')
+         ->select('tradespersons.id','firstname','lastname','introduction','city','zipcode','professions.name as tradeName')
+         ->get();
+      }
+
+      $helper = new HelperController;
+
+      $helper->AddTradesToPersons($data["allTp"]);
+
+      /* $data['allTp'] = Tradesperson::with(['addressTp' => function ($query) use ($selectedCity) {
          $query->where('id', '=', $selectedCity);
-      }])->get();
+      }])->get(); */
 
       /*       $data['allTp'] = Tradesperson::with(['professionsTp' => function($query,Request $request){
          $query->where('professions.id','=', $request->selectedTrade);
       }, 'addressTp'])->get(); */
-      dd($data["allTp"]);
 
       return view('tradespersonList')->with('allTp', $data["allTp"]);
+   }
+
+   public function deleteTradespersonById($id){
+      $tp = Tradesperson::find($id);
+      $tp->delete();
    }
 }
