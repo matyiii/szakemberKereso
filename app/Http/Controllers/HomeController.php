@@ -68,6 +68,6 @@ class HomeController extends Controller
 
         $helper->AddTradesToPersons($data["allTp"]);
 
-        return view('tradespersonList')->with('allTp', $data["allTp"]);;
+        return view('tradespersonList')->with('allTp', $data["allTp"]);
     }
 }
