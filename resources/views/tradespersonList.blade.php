@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mx-auto mt-5" id="tradespersonList">
         <div class="row">
-            @foreach ($allTp as $tp)
+            @forelse ($allTp as $tp)
                 <div class="col-md-2">
                     <div class="card" style="width: 10rem;">
                         <img src="https://via.placeholder.com/100" class="card-img-top" alt="...">
@@ -23,7 +23,11 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+            <div class="alert alert-warning">
+                Nincs ilyen szakember
+            </div>
+            @endforelse
         </div>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="tradespersonModal">
