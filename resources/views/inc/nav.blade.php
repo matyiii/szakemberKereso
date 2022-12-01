@@ -40,7 +40,7 @@
                         <a class="nav-link" href="addTp">{{ __('Szakember Hozzáadás') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="listAllTp">{{ __('Szakember Lista') }}</a>
+                        <a class="nav-link" href="{{ route('allTp') }}">{{ __('Szakember Lista') }}</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
