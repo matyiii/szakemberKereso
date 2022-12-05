@@ -50,7 +50,13 @@ class HomeController extends Controller
     }
 
     private function listAllAddress(){
-        $address = Address::all();
+        //$address = Address::all();
+        //dd($address);
+        $address =  DB::table('tradespersons')
+        ->leftJoin('addresses','tradespersons.addressId','=','addresses.id')
+        ->select('addresses.id','city')
+        ->distinct()
+        ->get();
         //dd($address);
         return $address;
     }
