@@ -1,1 +1,0 @@
-password $user->password = Hash::make(Input::get('password'));
